@@ -16,6 +16,7 @@ class UserSchema extends Schema {
         .notNullable()
         .unique()
       table.string('password', 60).notNullable()
+      table.timestamp('last_login').defaultTo(null)
       table.timestamps()
     })
   }
