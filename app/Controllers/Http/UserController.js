@@ -20,11 +20,14 @@ class UserController {
   async store ({ request, auth }) {
     const data = request.only(['name', 'email', 'password'])
 
-    await User.create(data)
+    const user = await User.create(data)
 
     const token = await auth.attempt(data.email, data.password)
 
-    return token
+    return {
+      user,
+      token
+    }
   }
 
   async update ({ request, response, auth }) {

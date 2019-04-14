@@ -40,6 +40,12 @@ class User extends Model {
       'App/Models/UserPreference'
     )
   }
+
+  subscription () {
+    return this.belongsToMany('App/Models/Meetup').pivotModel(
+      'App/Models/UserMeetup'
+    )
+  }
 }
 
 module.exports = User

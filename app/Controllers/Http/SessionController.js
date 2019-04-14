@@ -12,7 +12,19 @@ class SessionController {
         .where('email', data.email)
         .update({ last_login: new Date() }))
 
-    return token
+    const user = await User.query()
+      .where('email', data.email)
+      .first()
+
+    const preferences = await user.preferences().fetch()
+
+    return {
+      user: {
+        ...user.$attributes,
+        preferences
+      },
+      token
+    }
   }
 }
 
